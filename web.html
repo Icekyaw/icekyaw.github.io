@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Section - Clean Code</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* CSS Variables for easier maintenance */
+        :root {
+            --primary-color: #8b5cf6;
+            --secondary-color: #f8fafc;
+            --text-color: #374151;
+            --text-muted: #9d9fa1;
+            --border-color: #e5e7eb;
+            --border-radius: 8px;
+            --section-padding: 80px 0;
+            --container-max-width: 1200px;
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+        }
+
+        /* Container */
+        .main-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: var(--section-padding);
+            background-color: white;
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Contact Form Styles */
+        .kontak-left {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .kontak-form {
+            width: 100%;
+        }
+
+        .kontak-form div {
+            margin-bottom: 1.4rem;
+        }
+
+        .kontak-form input,
+        .kontak-form textarea {
+            width: 100%;
+            padding: 0.75rem 1.3rem;
+            font-family: var(--font-primary);
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            resize: none;
+            transition: all 0.3s ease;
+        }
+
+        .kontak-form input::placeholder,
+        .kontak-form textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .kontak-form input:focus,
+        .kontak-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .kontak-form textarea {
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Contact Info Styles */
+        .kontak-right {
+            padding: 2rem 0;
+        }
+
+        .kontak-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .kontak-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .kontak-item-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .kontak-item-icon i {
+            font-size: 1.2rem;
+        }
+
+        .kontak-item-detail h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .kontak-item-detail p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .kontak-left,
+            .kontak-right {
+                padding: 1.5rem;
+            }
+
+            .kontak-item {
+                padding: 1rem;
+            }
+
+            .kontak-item-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .kontak-item-icon i {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #contact {
+                padding: 40px 0;
+            }
+
+            .main-container {
+                padding: 0 15px;
+            }
+
+            .kontak-form input,
+            .kontak-form textarea {
+                padding: 0.6rem 1rem;
+            }
+
+            .btn-submit {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Loading State */
+        .btn-submit:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-submit.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .btn-submit.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Form Validation */
+        .kontak-form input.error,
+        .kontak-form textarea.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(28, 22, 22, 0.1);
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="main-container">
+            <div class="contact">
+                <!-- Contact Form -->
+                <div class="kontak-left">
+                    <form class="kontak-form" action="#" method="POST">
+                        <div>
+                            <input 
+                                type="text" 
+                                placeholder="Name" 
+                                name="name"
+                                required
+                                minlength="2"
+                            >
+                        </div>
+                        
+                        <div>
+                            <input 
+                                type="email" 
+                                placeholder="Email" 
+                                name="email"
+                                required
+                            >
+                        </div>
+                        
+                        <div>
+                            <textarea 
+                                name="message" 
+                                placeholder="Message"
+                                cols="30" 
+                                rows="10"
+                                required
+                                minlength="10"
+                            ></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="btn-submit">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="kontak-right">
+                    <div class="kontak-item">
+                        <div class="kontak-item-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="kontak-item-detail">
+                            <h4>Address</h4>
+                            <p>Jakarta, Indonesia</p>
+                        </div>
+                    </div>
+
+                    <div class="kontak-item">
+                        <div class="kontak-item-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="kontak-item-detail">
+                            <h4>Phone</h4>
+                            <p>(+62) 882-9685-6416</p>
+                        </div>
+                    </div>
+
+                    <div class="kontak-item">
+                        <div class="kontak-item-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="kontak-item-detail">
+                            <h4>Email</h4>
+                            <p>mfauziemirpasha@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
